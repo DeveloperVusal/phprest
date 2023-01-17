@@ -1,15 +1,4 @@
 <?php
-$cfg_apps = include $_SERVER['DOCUMENT_ROOT'].'/config/apps.php';
-
-foreach ($cfg_apps as $key => $val) {
-	$GLOBALS['APPCFG_'.$key] = $val;
-}
-
-$cfg_apipaths = include $_SERVER['DOCUMENT_ROOT'].'/config/api-paths.php';
-
-foreach ($cfg_apipaths as $key => $val) {
-	$GLOBALS[$key] = $val;
-}
 
 function app_autoloader($className) {
 	$defaultClassName = $className;

@@ -10,7 +10,7 @@ use App\Controllers\AuthRefreshTokenController;
 use App\Controllers\UserController;
 
 // Метод регистрации пользователя
-Route::post($apiUrl_accounts_registration, function() {
+Route::post('/v1/accounts/registration', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -23,7 +23,7 @@ Route::post($apiUrl_accounts_registration, function() {
 });
 
 // Метод авторизации пользователя
-Route::post($apiUrl_accounts_auth, function() {
+Route::post('/v1/accounts/auth', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -36,7 +36,7 @@ Route::post($apiUrl_accounts_auth, function() {
 });
 
 // Метод получения нового acceess и refresh токена
-Route::get($apiUrl_accounts_refresh_token, function() {
+Route::get('/v1/accounts/refresh', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -51,7 +51,7 @@ Route::get($apiUrl_accounts_refresh_token, function() {
 });
 
 // Метод аутентификации пользователи
-Route::get($apiUrl_accounts_auth_verify, function() {
+Route::get('/v1/accounts/auth_verify', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -71,7 +71,7 @@ Route::get($apiUrl_accounts_auth_verify, function() {
 });
 
 // Метод опеделения локали (языка) пользователя
-Route::get($apiUrl_accounts_locale, function() {
+Route::get('/v1/accounts/locale', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -92,7 +92,7 @@ Route::get($apiUrl_accounts_locale, function() {
 });
 
 // Метод выхода (логаута) пользователя
-Route::get($apiUrl_accounts_logout, function() {
+Route::get('/v1/accounts/logout', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -109,7 +109,7 @@ Route::get($apiUrl_accounts_logout, function() {
 });
 
 // Метод подтверждения кода проверки
-Route::post($apiUrl_accounts_confirm_code, function() {
+Route::post('/v1/accounts/confirm_code', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -129,7 +129,7 @@ Route::post($apiUrl_accounts_confirm_code, function() {
 });
 
 // Метод восстановления пароля
-Route::post($apiUrl_accounts_forgot_password, function() {
+Route::post('/v1/accounts/forgot_password', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -149,7 +149,7 @@ Route::post($apiUrl_accounts_forgot_password, function() {
 });
 
 // Метод изменения пароля (сброса пароля)
-Route::post($apiUrl_users_update_pwd, function() {
+Route::patch('/v1/users/update', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -172,7 +172,7 @@ Route::post($apiUrl_users_update_pwd, function() {
 });
 
 // Метод получения данных пользователя
-Route::get($apiUrl_users_get, function() {
+Route::get('/v1/users/get', function() {
 	$verifyApp = new VerifyAppController();
 
 	if ($verifyApp->is_verify) {
@@ -198,12 +198,6 @@ Route::get($apiUrl_users_get, function() {
 });
 
 
-// Тестинг Куки
-// Route::post($apiUrl_accounts_saveCookie, function() {
-// 	setcookie('step-0:httponly', 'example-token', [
-// 		'expires' => time() + 60 * 60 * 24 * 30, 
-// 		'path' => '/',
-// 		'domain' => '.butago.com',
-// 		'httponly' => true
-// 	]);
-// });
+Route::get('/', function() {
+	echo 'Hello world';
+});

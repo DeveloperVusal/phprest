@@ -20,6 +20,7 @@ header('Access-Control-Allow-Credentials: true');
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 
+require('./autoload/configs.php');
 require('./autoload/register.php');
 
 use Core\Http\Router;
