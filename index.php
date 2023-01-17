@@ -1,8 +1,8 @@
 <?php
-header('Content-Type: application/json');
-
 require('./vendor/autoload.php');
 require('./autoload/helpers.php');
+
+header('Content-Type: '.$_ENV['APP_CONTENT_TYPE']);
 
 if (isset($_SERVER['HTTP_REFERER']) && mb_strlen($_SERVER['HTTP_REFERER'])) {
     $domainPath = parse_url($_SERVER['HTTP_REFERER']);
