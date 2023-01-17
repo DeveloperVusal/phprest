@@ -1,11 +1,14 @@
 <?php
 header('Content-Type: application/json');
 
-if ($_SERVER['HTTP_REFERER']) {
+require('./vendor/autoload.php');
+require('./autoload/helpers.php');
+
+if (isset($_SERVER['HTTP_REFERER']) && mb_strlen($_SERVER['HTTP_REFERER'])) {
     $domainPath = parse_url($_SERVER['HTTP_REFERER']);
     $domainPath = $domainPath['scheme'].'://'.$domainPath['host'];
 } else {
-    $domainPath = 'http://accounts.butago.com';
+    $domainPath = $_ENV['APP_REFERER_URI'];
 }
 
 header('Access-Control-Allow-Origin: '.$domainPath);
@@ -17,11 +20,9 @@ header('Access-Control-Allow-Credentials: true');
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 
-require('./vendor/autoload.php');
-require('./autoload/helpers.php');
 require('./autoload/register.php');
 
-use Http\Router;
+use Core\Http\Router;
 
 include './routes/api.php';
 

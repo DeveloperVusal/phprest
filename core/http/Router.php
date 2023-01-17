@@ -1,5 +1,5 @@
 <?php
-namespace Http;
+namespace Core\Http;
 
 class Router {
 	/**

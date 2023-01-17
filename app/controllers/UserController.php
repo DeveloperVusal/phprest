@@ -1,11 +1,10 @@
 <?php
 namespace App\Controllers;
 
-use Http\Request;
+use Core\Http\Request;
 
 use App\Services\UserService;
 use App\Services\SxGeo\SxGeoService;
-use App\Services\LanguageService;
 
 class UserController {
 	/**

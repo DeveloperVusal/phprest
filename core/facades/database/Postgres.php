@@ -1,7 +1,7 @@
 <?php
-namespace App\Database;
+namespace Core\Facades\Database;
 
-use App\Core\Database;
+use Core\Engine\Database;
 
 class Postgres extends Database {
 	

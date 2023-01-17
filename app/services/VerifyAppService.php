@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Database\Postgres;
+use Core\Facades\Database\Postgres;
 
 class VerifyAppService {
     /**

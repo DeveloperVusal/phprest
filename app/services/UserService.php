@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Core\Handler;
-use App\Database\Postgres;
-use Http\Request;
+use Core\Engine\Handler;
+use Core\Facades\Database\Postgres;
+use Core\Http\Request;
+
 use \Vudev\JsonWebToken\JWT;
 use PHPMailer\PHPMailer\PHPMailer;
 

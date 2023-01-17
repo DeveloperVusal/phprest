@@ -1,6 +1,6 @@
 <?php
-use Http\Request;
-use Http\Route;
+use Core\Http\Request;
+use Core\Facades\Http\Route;
 
 use App\Controllers\VerifyAppController;
 

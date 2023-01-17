@@ -1,8 +1,8 @@
 <?php
-namespace Http;
+namespace Core\Facades\Http;
 
-use Http\Request;
-use Http\Router;
+use Core\Http\Request;
+use Core\Http\Router;
 
 class Route {
 	/**
