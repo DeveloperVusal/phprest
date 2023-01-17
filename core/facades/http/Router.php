@@ -1,24 +1,7 @@
 <?php
-namespace Core\Http;
+namespace Core\Facades\Http;
 
 class Router {
-	/**
-	 * Роуты исполняемые
-	 * Используются при вызове, например при выполнении POST запроса
-	 * 
-	 * @static
-	 * @var array
-	 */
-	protected static $app_routes = [];
-
-	/**
-	 * Хранилище роутов
-	 * 
-	 * @static
-	 * @var array
-	 */
-	protected static $app_routes_store = [];
-
 
 	/**
 	 * Метод получения пути
@@ -34,10 +17,11 @@ class Router {
 		$return = false;
 
 		$uri = self::parseUrlPath($uri);
-
+		list($uri, $homeDir) = self::normalizeUrlPath($uri);
+		
 		if (array_key_exists($type, $routes)) {
 			foreach ($routes[$type] as $route) {
-				if ($route['uri'] === $uri) {
+				if ($homeDir.$route['uri'] === $uri) {
 					$return = $route;
 
 					break;
@@ -51,7 +35,7 @@ class Router {
 		$is_store = false;
 
 		foreach ($routesStorage[$type] as $route) {
-			if ($route['uri'] === $uri) {
+			if ($homeDir.$route['uri'] === $uri) {
 				$is_store = true;
 				
 				break;
@@ -60,7 +44,7 @@ class Router {
 
 		if ($is_store === false) {
 			http_response_code(404);
-			echo '404 Not found';
+			echo "\n404 Not found";
 		}
 	}
 
@@ -76,6 +60,23 @@ class Router {
 
 		return $pth['path'];
 	}
+
+	/**
+	 * Метод нормализации url 
+	 * 
+	 * @param string $uri
+	 * @static
+	 * @return array
+	 */
+	public static function normalizeUrlPath($uri) {
+		$fullPath = __DIR__;
+		$partsPath = explode('/', str_replace('\\', '/', $fullPath));
+		$partsPath = array_slice($partsPath, 0, sizeof($partsPath) - 3);
+		$homeDir = preg_match('/'.end($partsPath).'/iu', $uri, $matches) ? '/'.end($partsPath) : '';
+
+		return [$uri, $homeDir];
+	}
+
 
 	/**
 	 * Метод добавление роута
@@ -106,7 +107,7 @@ class Router {
 	 */
 	private static function getRoutes()
 	{
-		return self::$app_routes;
+		return $GLOBALS['APP_ROUTES'];
 	}
 
 	/**
@@ -118,7 +119,7 @@ class Router {
 	 */
 	private static function saveRoute($data)
 	{
-		self::$app_routes = $data;
+		$GLOBALS['APP_ROUTES'] = $data;
 	}
 
 
@@ -151,7 +152,7 @@ class Router {
 	 */
 	private static function getRoutesStorage()
 	{
-		return self::$app_routes_store;
+		return $GLOBALS['APP_ROUTES_STORE'];
 	}
 
 	/**
@@ -163,6 +164,6 @@ class Router {
 	 */
 	private static function saveRouteStorage($data)
 	{
-		self::$app_routes_store = $data;
+		$GLOBALS['APP_ROUTES_STORE'] = $data;
 	}
 }

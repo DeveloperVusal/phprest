@@ -1,8 +1,8 @@
 <?php
 namespace Core\Facades\Http;
 
+use Core\Facades\Http\Router;
 use Core\Http\Request;
-use Core\Http\Router;
 
 class Route {
 	/**
@@ -18,7 +18,9 @@ class Route {
 	{
 		Router::addRouteStorage($uri, $action);
 
-		if (Router::parseUrlPath($_SERVER['REQUEST_URI']) === $uri) {
+		list($url, $homeDir) = Router::normalizeUrlPath($_SERVER['REQUEST_URI']);
+
+		if (Router::parseUrlPath($_SERVER['REQUEST_URI']) === $homeDir.$uri) {
 			$request = new Request;
 
 			if ($request->method === 'GET') {

@@ -23,7 +23,7 @@ header('Access-Control-Allow-Credentials: true');
 require('./autoload/configs.php');
 require('./autoload/register.php');
 
-use Core\Http\Router;
+use Core\Facades\Http\Router;
 
 include './routes/api.php';
 

@@ -199,5 +199,7 @@ Route::get('/v1/users/get', function() {
 
 
 Route::get('/', function() {
+	var_dump(config('bond/jwt_secret'));
+	
 	echo 'Hello world';
 });
