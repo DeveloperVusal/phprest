@@ -64,6 +64,16 @@ abstract class Database {
 	abstract protected static function connect_db();
 
 	/**
+	 * Метод варианта соединения с БД
+	 * 
+	 * @param string $variant
+	 * @access public
+	 * @static
+	 * @return object|string
+	 */
+	abstract public static function connection(string $variant);
+
+	/**
 	 * Метод выполнения подготовленных запросов
 	 * 
 	 * @param string $query SQL запрос для PDO

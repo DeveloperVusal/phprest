@@ -3,7 +3,7 @@ namespace Core\Facades\Database;
 
 use Core\Engine\Database;
 
-class Postgres extends Database {
+class MySQL extends Database {
 	
 	public static function __constructStatic()
 	{
@@ -14,11 +14,11 @@ class Postgres extends Database {
 	protected static function connect_db(string $variant = null)
 	{
 		try {
-			if (mb_strlen($variant)) $cfg = self::get_config()['connections']['postgresql'][$variant];
-			else $cfg = self::get_config()['connections']['postgresql']['pgsql'];
-			
-			$dsn = $cfg['driver'].':host='.$cfg['host'].';port='.$cfg['port'].';dbname='.$cfg['dbname'].';user='.$cfg['username'].';password='.$cfg['password'];
-			self::$dbn = new \PDO($dsn);
+			if (mb_strlen($variant)) $cfg = self::get_config()['connections']['mysql'][$variant];
+			else $cfg = self::get_config()['connections']['mysql']['mysql'];
+
+			$dsn = 'mysql:host='.$cfg['host'].';port='.$cfg['port'].';dbname='.$cfg['dbname'];
+			self::$dbn = new \PDO($dsn, $cfg['username'], $cfg['password']);
 
 			return self::$dbn;
 		} catch (\PDOException $e) {
