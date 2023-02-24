@@ -10,5 +10,9 @@ function env($name) {
 }
 
 function storage_path($path = null) {
-    return $_SERVER['DOCUMENT_ROOT'].'/storage/'.$path;
+    $storage = __DIR__.'/../storage/';
+
+    if (!is_dir($storage)) mkdir($storage, 0775);
+
+    return $storage.$path;
 }
