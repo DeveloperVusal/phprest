@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+define('PHPREST_START', microtime(true));
+
+require __DIR__.'/autoload/register.php';
+
+$console = new Core\Engine\Console($argv);
+$console->handleCommands();
+
+exit('Worked '.(microtime(true) - PHPREST_START).' seconds');
