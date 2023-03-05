@@ -5,16 +5,17 @@ use Core\Facades\Http\Router;
 use Core\Http\Request;
 
 class Route {
+
 	/**
 	 * Метод обработки GET запроса
 	 * 
 	 * @param string $uri 
-	 * @param callable $action 
+	 * @param \Closure|callable|array $action 
 	 * @access public
 	 * @static
 	 * @return void
 	 */
-	public static function get($uri, $action = null)
+	public static function get(string $uri, \Closure|callable|array $action = null)
 	{
 		Router::addRouteStorage($uri, $action);
 
@@ -38,12 +39,12 @@ class Route {
 	 * Метод обработки POST запроса
 	 * 
 	 * @param string $uri 
-	 * @param callable $action 
+	 * @param callable|array $action 
 	 * @access public
 	 * @static
 	 * @return void
 	 */
-	public static function post($uri, $action = null)
+	public static function post(string $uri, callable|array $action = null)
 	{
 		Router::addRouteStorage($uri, $action);
 
@@ -65,12 +66,12 @@ class Route {
 	 * Метод обработки PUT запроса
 	 * 
 	 * @param string $uri 
-	 * @param callable $action 
+	 * @param callable|array $action 
 	 * @access public
 	 * @static
 	 * @return void
 	 */
-	public static function put($uri, $action = null)
+	public static function put(string $uri, callable|array $action = null)
 	{
 		Router::addRouteStorage($uri, $action);
 
@@ -92,12 +93,12 @@ class Route {
 	 * Метод обработки PATCH запроса
 	 * 
 	 * @param string $uri 
-	 * @param callable $action 
+	 * @param callable|array $action 
 	 * @access public
 	 * @static
 	 * @return void
 	 */
-	public static function patch($uri, $action = null)
+	public static function patch(string $uri, callable|array $action = null)
 	{
 		Router::addRouteStorage($uri, $action);
 
@@ -119,12 +120,12 @@ class Route {
 	 * Метод обработки DELETE запроса
 	 * 
 	 * @param string $uri 
-	 * @param callable $action 
+	 * @param callable|array $action 
 	 * @access public
 	 * @static
 	 * @return void
 	 */
-	public static function delete($uri, $action = null)
+	public static function delete(string $uri, callable|array $action = null)
 	{
 		Router::addRouteStorage($uri, $action);
 

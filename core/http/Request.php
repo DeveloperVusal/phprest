@@ -37,13 +37,13 @@ class Request {
 	 * 
 	 * @param string $key Ключ необходимого свойства
 	 * @access public
-	 * @return integer|string|array
+	 * @return integer|string|array|bool
 	 */
 	public function field($key)
 	{
 		$body = $this->body();
 
-		return $body[$key];
+		return isset($body[$key]) ? $body[$key] : false;
 	}
 
 	/**

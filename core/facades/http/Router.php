@@ -1,6 +1,8 @@
 <?php
 namespace Core\Facades\Http;
 
+use Core\Http\Request;
+
 class Router {
 
 	/**
@@ -29,7 +31,11 @@ class Router {
 			}
 		}
 		
-		if ($return !== false) $return['action']();
+		if ($return !== false) {
+			if (is_callable($return['action'])) {
+				return call_user_func($return['action'], $return['args']);
+			}
+		}
 
 		$routesStorage = self::getRoutesStorage();
 		$is_store = false;
@@ -82,18 +88,19 @@ class Router {
 	 * Метод добавление роута
 	 * 
 	 * @param string $uri
-	 * @param callable $action
+	 * @param \Closure|callable|array $action
 	 * @param string $type
 	 * @static
 	 * @return void
 	 */
-	public static function addRoute($uri, $action = null, $type = 'api')
+	public static function addRoute(string $uri, \Closure|callable|array $action = null, string $type = 'api')
 	{
 		$routes = self::getRoutes();
 
 		$routes[$type][] = [
 			'uri' => $uri,
-			'action' => $action
+			'action' => $action,
+			'args' => [],
 		];
 
 		self::saveRoute($routes);
