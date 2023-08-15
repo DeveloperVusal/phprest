@@ -4,6 +4,7 @@ namespace Core\Facades;
 
 use Core\Facades\Http\Router;
 use Core\Http\Request;
+use ReflectionFunction;
 
 abstract class Facade {
 

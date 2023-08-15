@@ -1,8 +1,6 @@
 <?php
 namespace Core\Facades\Http;
 
-use Core\Http\Request;
-
 class Router {
 
 	/**
@@ -33,7 +31,7 @@ class Router {
 		
 		if ($return !== false) {
 			if (is_callable($return['action'])) {
-				return call_user_func($return['action'], $return['args']);
+				return call_user_func($return['action'], ...$return['args']);
 			}
 		}
 
@@ -96,11 +94,27 @@ class Router {
 	public static function addRoute(string $uri, \Closure|callable|array $action = null, string $type = 'api')
 	{
 		$routes = self::getRoutes();
+		$functionArgs = [];
+
+		if (is_callable($action)) {
+			$ref = new \ReflectionFunction($action);
+
+			foreach($ref->getParameters() as $parameter) {
+				$result = null;
+
+				if (class_exists($parameter->getType()->getName())) {
+					$class = $parameter->getType()->getName();
+					$result = new $class();
+				}
+
+				$functionArgs[] = $result;
+			}
+		}
 
 		$routes[$type][] = [
 			'uri' => $uri,
 			'action' => $action,
-			'args' => [],
+			'args' => $functionArgs,
 		];
 
 		self::saveRoute($routes);
